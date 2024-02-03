@@ -11,8 +11,27 @@ datasource db {
 }
 
 model Patient {
-  id          Int    @id @default(autoincrement())
-  name        String
-  national_id String @unique
-  phone       String @unique
+  id         String     @id @default(uuid())
+  name       String
+  nationalId String     @unique
+  phone      String     @unique
+  Decision   Decision[]
+}
+
+model Decision {
+  id             String   @id @default(uuid())
+  serialNumber   Int
+  patient        Patient  @relation(fields: [patientId], references: [id])
+  patientId      String
+  issuedAt       DateTime
+  expirationDate DateTime
+  Token          Token[]
+}
+
+model Token {
+  id         String    @id @default(uuid())
+  value      Int
+  decision   Decision  @relation(fields: [decisionId], references: [id])
+  decisionId String
+  usedAt     DateTime?
 }
