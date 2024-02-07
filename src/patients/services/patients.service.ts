@@ -58,4 +58,17 @@ export class PatientsService {
 
     return patient;
   }
+
+  /**
+   * deletes a patient by id
+   * @param id - id of the patient to delete
+   * @returns the deleted patient's object
+   */
+  async delete(id: string): Promise<Patient> {
+    const patient = await this.prisma.patient.delete({
+      where: { id },
+    });
+
+    return patient;
+  }
 }

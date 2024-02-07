@@ -62,4 +62,14 @@ export class PatientsController {
   ): Promise<Patient> {
     return await this.patientsService.update(id, updatePatientDto);
   }
+
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id of the patient to be delted',
+  })
+  @Delete(':id')
+  async delete(@Param() { id }: PatientParamsDto): Promise<Patient> {
+    return await this.patientsService.delete(id);
+  }
 }
