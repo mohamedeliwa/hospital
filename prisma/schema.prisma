@@ -16,22 +16,28 @@ model Patient {
   nationalId String     @unique
   phone      String     @unique
   Decision   Decision[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }
 
 model Decision {
   id             String   @id @default(uuid())
   serialNumber   Int
-  patient        Patient  @relation(fields: [patientId], references: [id])
+  patient        Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
   patientId      String
   issuedAt       DateTime
   expirationDate DateTime
   Token          Token[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Token {
   id         String    @id @default(uuid())
   value      Int
-  decision   Decision  @relation(fields: [decisionId], references: [id])
+  decision   Decision  @relation(fields: [decisionId], references: [id], onDelete: Cascade)
   decisionId String
   usedAt     DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
