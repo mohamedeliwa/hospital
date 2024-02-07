@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsNumberString,
+  IsOptional,
   IsPhoneNumber,
   IsString,
   Length,
@@ -9,37 +10,40 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class CreatePatientDto {
+export class UpdatePatientDto {
   @ApiProperty({
     type: String,
-    required: true,
+    required: false,
     minLength: 3,
     maxLength: 50,
     description: 'name of the patient',
   })
+  @IsOptional()
   @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(50)
-  name: string;
+  name?: string;
 
   @ApiProperty({
     type: String,
-    required: true,
+    required: false,
     description: 'national ID of the patient',
   })
+  @IsOptional()
   @IsNotEmpty()
   @IsNumberString()
   @Length(14, 14)
-  nationalId: string;
+  nationalId?: string;
 
   @ApiProperty({
     type: String,
-    required: true,
+    required: false,
     description: 'phone number of the patient',
   })
+  @IsOptional()
   @IsNotEmpty()
   @IsNumberString()
   @IsPhoneNumber()
-  phone: string;
+  phone?: string;
 }

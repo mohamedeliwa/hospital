@@ -40,4 +40,22 @@ export class PatientsService {
     });
     return patient;
   }
+
+  /**
+   * updates patient data by id
+   * @param id - patient's id to be updated
+   * @param updatePatientDto - patient's data to be updated
+   * @returns the updated patient object
+   */
+  async update(
+    id: string,
+    updatePatientDto: UpdatePatientDto,
+  ): Promise<Patient> {
+    const patient = this.prisma.patient.update({
+      where: { id },
+      data: updatePatientDto,
+    });
+
+    return patient;
+  }
 }

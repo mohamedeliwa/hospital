@@ -49,4 +49,17 @@ export class PatientsController {
   async findOne(@Param() { id }: PatientParamsDto): Promise<Patient> {
     return await this.patientsService.findOne(id);
   }
+
+  @ApiParam({
+    name: ':id',
+    required: true,
+    description: 'id of the patient to be updated',
+  })
+  @Patch(':id')
+  async update(
+    @Param() { id }: PatientParamsDto,
+    @Body() updatePatientDto: UpdatePatientDto,
+  ): Promise<Patient> {
+    return await this.patientsService.update(id, updatePatientDto);
+  }
 }
