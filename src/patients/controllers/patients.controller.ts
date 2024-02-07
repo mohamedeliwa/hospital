@@ -50,6 +50,11 @@ export class PatientsController {
     return await this.patientsService.findOne(id);
   }
 
+  @Get()
+  async find(@Query() findPatientDto: FindPatientDto): Promise<Patient[]> {
+    return await this.patientsService.find(findPatientDto);
+  }
+
   @ApiParam({
     name: ':id',
     required: true,

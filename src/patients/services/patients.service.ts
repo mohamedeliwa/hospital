@@ -42,6 +42,27 @@ export class PatientsService {
   }
 
   /**
+   * finds multiple patients
+   * @param findPatientDto - patients' data to find
+   * @returns an array of the found patients
+   */
+  async find(findPatientDto: FindPatientDto): Promise<Patient[]> {
+    // TODO: add fuzzy finding feature, or searching with non exact matching
+    const { skip, limit, sortField, sortValue, ...matches } = findPatientDto;
+
+    const patients = await this.prisma.patient.findMany({
+      where: matches,
+      skip,
+      orderBy: {
+        [sortField || AllowedPatientSortingFields.name]:
+          sortValue || AllowedUserSortingValues.asc,
+      },
+      take: limit,
+    });
+    return patients;
+  }
+
+  /**
    * updates patient data by id
    * @param id - patient's id to be updated
    * @param updatePatientDto - patient's data to be updated
