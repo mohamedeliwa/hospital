@@ -28,4 +28,16 @@ export class PatientsService {
     const patient = this.prisma.patient.create({ data: createPatientDto });
     return patient;
   }
+
+  /**
+   * finds a patient by id
+   * @param id - patient's id to find
+   * @returns the found patient's object
+   */
+  async findOne(id: string): Promise<Patient> {
+    const patient = await this.prisma.patient.findUniqueOrThrow({
+      where: { id },
+    });
+    return patient;
+  }
 }

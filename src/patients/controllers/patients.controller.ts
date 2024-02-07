@@ -39,4 +39,14 @@ export class PatientsController {
   async create(@Body() patient: CreatePatientDto): Promise<Patient> {
     return await this.patientsService.create(patient);
   }
+
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id of the patient to be returned',
+  })
+  @Get(':id')
+  async findOne(@Param() { id }: PatientParamsDto): Promise<Patient> {
+    return await this.patientsService.findOne(id);
+  }
 }
