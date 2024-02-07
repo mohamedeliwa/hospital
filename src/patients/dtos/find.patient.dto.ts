@@ -27,7 +27,7 @@ export enum AllowedPatientSortingFields {
   phone = 'phone',
 }
 
-export enum AllowedUserSortingValues {
+export enum AllowedPatientSortingValues {
   asc = 'asc',
   desc = 'desc',
 }
@@ -98,12 +98,12 @@ export class FindPatientDto {
   sortField?: string;
 
   @ApiProperty({
-    enum: AllowedUserSortingValues,
+    enum: AllowedPatientSortingValues,
     required: false,
   })
   @ValidateIf((obj) => Boolean(obj.sortField))
   @IsNotEmpty()
-  @IsIn(Object.values(AllowedUserSortingValues))
+  @IsIn(Object.values(AllowedPatientSortingValues))
   sortValue?: string;
 
   @ApiProperty({
