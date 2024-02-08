@@ -40,4 +40,14 @@ export class DecisionsController {
   async create(@Body() decision: CreateDecisionDto): Promise<Decision> {
     return await this.decisionsService.create(decision);
   }
+
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id of the decision to be returned',
+  })
+  @Get(':id')
+  async findOne(@Param() { id }: DecisionParamsDto): Promise<Decision> {
+    return await this.decisionsService.findOne(id);
+  }
 }

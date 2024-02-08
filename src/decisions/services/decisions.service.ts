@@ -39,4 +39,16 @@ export class DecisionsService {
     });
     return decision;
   }
+
+  /**
+   * finds a decision by id
+   * @param id - decision's id to find
+   * @returns the found decision's object
+   */
+  async findOne(id: string): Promise<Decision> {
+    const decision = await this.prisma.decision.findUniqueOrThrow({
+      where: { id },
+    });
+    return decision;
+  }
 }
