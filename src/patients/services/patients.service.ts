@@ -3,7 +3,7 @@ import { Patient, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   AllowedPatientSortingFields,
-  AllowedUserSortingValues,
+  AllowedPatientSortingValues,
   FindPatientDto,
 } from '../dtos/find.patient.dto';
 import { UpdatePatientDto } from '../dtos/update.patient.dto';
@@ -55,7 +55,7 @@ export class PatientsService {
       skip,
       orderBy: {
         [sortField || AllowedPatientSortingFields.name]:
-          sortValue || AllowedUserSortingValues.asc,
+          sortValue || AllowedPatientSortingValues.asc,
       },
       take: limit,
     });
