@@ -9,7 +9,12 @@ import { PrismaClientExceptionFilter } from './prisma/prisma.exception.filter';
 import { DecisionsModule } from './decisions/decisions.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModule, PatientsModule, DecisionsModule],
+  imports: [
+    ConfigModule.forRoot(),
+    PrismaModule,
+    PatientsModule,
+    DecisionsModule,
+  ],
   controllers: [AppController],
   providers: [
     {
