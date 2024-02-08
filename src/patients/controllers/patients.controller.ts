@@ -13,11 +13,12 @@ import {
 import { PatientsService } from '../services/patients.service';
 import { CreatePatientDto } from '../dtos/create.patient.dto';
 import { Patient } from '@prisma/client';
-import { ApiParam } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { PatientParamsDto } from '../dtos/patient.params.dto';
 import { FindPatientDto } from '../dtos/find.patient.dto';
 import { UpdatePatientDto } from '../dtos/update.patient.dto';
 
+@ApiTags('Patients')
 @UsePipes(
   new ValidationPipe({
     transform: true,
