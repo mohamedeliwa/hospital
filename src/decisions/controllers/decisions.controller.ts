@@ -63,4 +63,14 @@ export class DecisionsController {
   ): Promise<Decision> {
     return await this.decisionsService.update(id, updateDecisionDto);
   }
+
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'id of the Decision to be deleted',
+  })
+  @Delete(':id')
+  async delete(@Param() { id }: DecisionParamsDto): Promise<Decision> {
+    return await this.decisionsService.delete(id);
+  }
 }

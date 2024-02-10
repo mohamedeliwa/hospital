@@ -71,4 +71,17 @@ export class DecisionsService {
 
     return decision;
   }
+
+  /**
+   * deletes a decision by id
+   * @param id - id of the decision to delete
+   * @returns the deleted decision's object
+   */
+  async delete(id: string): Promise<Decision> {
+    const decision = await this.prisma.decision.delete({
+      where: { id },
+    });
+
+    return decision;
+  }
 }
