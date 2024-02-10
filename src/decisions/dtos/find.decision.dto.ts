@@ -6,11 +6,13 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
-  IsPositive,
+  IsString,
   IsUUID,
+  Matches,
   Min,
   ValidateIf,
 } from 'class-validator';
+import { DIGIT_STRING_REGEX } from './create.decision.dto';
 
 export enum AllowedDecisionSortingFields {
   serialNumber = 'serialNumber',
@@ -33,9 +35,9 @@ export class FindDecisionDto {
   })
   @IsOptional()
   @IsNotEmpty()
-  @IsInt()
-  @IsPositive()
-  serialNumber?: number;
+  @IsString()
+  @Matches(DIGIT_STRING_REGEX)
+  serialNumber?: string;
 
   @ApiProperty({
     type: String,

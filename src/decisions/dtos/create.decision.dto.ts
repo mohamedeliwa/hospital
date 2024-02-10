@@ -1,11 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
-  IsInt,
   IsNotEmpty,
-  IsPositive,
+  IsString,
   IsUUID,
+  Matches,
 } from 'class-validator';
+
+/**
+ * matches a string that is composed only of one digit or more.
+ */
+export const DIGIT_STRING_REGEX = /^\d+$/g;
 
 export class CreateDecisionDto {
   @ApiProperty({
@@ -15,9 +20,9 @@ export class CreateDecisionDto {
     description: 'serial number of the decision',
   })
   @IsNotEmpty()
-  @IsInt()
-  @IsPositive()
-  serialNumber: number;
+  @IsString()
+  @Matches(DIGIT_STRING_REGEX)
+  serialNumber: string;
 
   @ApiProperty({
     type: String,

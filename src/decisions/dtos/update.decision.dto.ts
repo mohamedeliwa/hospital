@@ -1,12 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
-  IsInt,
   IsNotEmpty,
   IsOptional,
-  IsPositive,
+  IsString,
   IsUUID,
+  Matches,
 } from 'class-validator';
+import { DIGIT_STRING_REGEX } from './create.decision.dto';
 
 export class UpdateDecisionDto {
   @ApiProperty({
@@ -17,9 +18,9 @@ export class UpdateDecisionDto {
   })
   @IsOptional()
   @IsNotEmpty()
-  @IsInt()
-  @IsPositive()
-  serialNumber?: number;
+  @IsString()
+  @Matches(DIGIT_STRING_REGEX)
+  serialNumber?: string;
 
   @ApiProperty({
     type: String,
