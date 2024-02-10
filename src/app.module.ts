@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { APP_FILTER } from '@nestjs/core';
 import { PrismaClientExceptionFilter } from './prisma/prisma.exception.filter';
 import { DecisionsModule } from './decisions/decisions.module';
+import { TokensModule } from './tokens/tokens.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DecisionsModule } from './decisions/decisions.module';
     PrismaModule,
     PatientsModule,
     DecisionsModule,
+    TokensModule,
   ],
   controllers: [AppController],
   providers: [
