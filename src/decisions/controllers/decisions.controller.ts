@@ -50,4 +50,17 @@ export class DecisionsController {
   async findOne(@Param() { id }: DecisionParamsDto): Promise<Decision> {
     return await this.decisionsService.findOne(id);
   }
+
+  @ApiParam({
+    name: ':id',
+    required: true,
+    description: 'id of the Decision to be updated',
+  })
+  @Patch(':id')
+  async update(
+    @Param() { id }: DecisionParamsDto,
+    @Body() updateDecisionDto: UpdateDecisionDto,
+  ): Promise<Decision> {
+    return await this.decisionsService.update(id, updateDecisionDto);
+  }
 }

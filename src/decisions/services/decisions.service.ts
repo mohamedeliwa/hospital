@@ -51,4 +51,24 @@ export class DecisionsService {
     });
     return decision;
   }
+
+  /**
+   * updates decision data by id
+   * @param id - decision's id to be updated
+   * @param updateDecisionDto - decision's data to be updated
+   * @returns the updated decision object
+   */
+  async update(
+    id: string,
+    updateDecisionDto: UpdateDecisionDto,
+  ): Promise<Decision> {
+    // return updateDecisionDto as unknown as Decision;
+
+    const decision = this.prisma.decision.update({
+      where: { id },
+      data: updateDecisionDto,
+    });
+
+    return decision;
+  }
 }
