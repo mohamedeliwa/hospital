@@ -22,7 +22,7 @@ model Patient {
 
 model Decision {
   id             String   @id @default(uuid())
-  serialNumber   Int
+  serialNumber   String   @unique
   patient        Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
   patientId      String
   issuedAt       DateTime
