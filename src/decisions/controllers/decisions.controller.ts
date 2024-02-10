@@ -51,6 +51,11 @@ export class DecisionsController {
     return await this.decisionsService.findOne(id);
   }
 
+  @Get()
+  async find(@Query() findDecisionDto: FindDecisionDto): Promise<Decision[]> {
+    return await this.decisionsService.find(findDecisionDto);
+  }
+
   @ApiParam({
     name: ':id',
     required: true,

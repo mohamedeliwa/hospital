@@ -53,6 +53,27 @@ export class DecisionsService {
   }
 
   /**
+   * finds multiple decisions
+   * @param findDecisionDto - decisions' data to find
+   * @returns an array of the found decisions
+   */
+  async find(findDecisionDto: FindDecisionDto): Promise<Decision[]> {
+    // TODO: add fuzzy finding feature, or searching with non exact matching
+    const { skip, limit, sortField, sortValue, ...matches } = findDecisionDto;
+
+    const decisions = await this.prisma.decision.findMany({
+      where: matches,
+      skip,
+      orderBy: {
+        [sortField || AllowedDecisionSortingFields.serialNumber]:
+          sortValue || AllowedDecisionSortingValues.asc,
+      },
+      take: limit,
+    });
+    return decisions;
+  }
+
+  /**
    * updates decision data by id
    * @param id - decision's id to be updated
    * @param updateDecisionDto - decision's data to be updated
