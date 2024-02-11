@@ -43,7 +43,6 @@ export default function RootLayout({
         <AntdRegistry>
           <Layout>
             <Header style={{ display: 'flex', alignItems: 'center' }}>
-              {/* <div className="demo-logo"> الرئيسية</div> */}
               <Menu
                 theme="dark"
                 mode="horizontal"
