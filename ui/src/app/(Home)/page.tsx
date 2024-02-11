@@ -1,9 +1,7 @@
-import Image from 'next/image';
 import styles from './page.module.css';
-
 import ActionsBar from '../components/ActionsBar';
 import PatientsTable from '../components/PatientsTable';
-import DecisionsTable from '../components/DecisionsTable';
+// import DecisionsTable from '../components/DecisionsTable';
 
 export default function Home() {
   return (
@@ -12,15 +10,7 @@ export default function Home() {
 
       <div className={styles.center}>
         <PatientsTable />
-        <DecisionsTable />
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+        {/* <DecisionsTable /> */}
       </div>
 
       <div className={styles.grid}></div>
