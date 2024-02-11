@@ -2,6 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTokenDto } from '../dtos/create.token.dto';
 import { Token } from '@prisma/client';
+import {
+  AllowedTokenSortingFields,
+  AllowedTokenSortingValues,
+  FindTokenDto,
+} from '../dtos/find.token.dto';
 
 @Injectable()
 export class TokensService {
@@ -44,5 +49,26 @@ export class TokensService {
       where: { id },
     });
     return token;
+  }
+
+  /**
+   * finds multiple token
+   * @param findTokenDto - token' data to find
+   * @returns an array of the found token
+   */
+  async find(findTokenDto: FindTokenDto): Promise<Token[]> {
+    // TODO: add fuzzy finding feature, or searching with non exact matching
+    const { skip, limit, sortField, sortValue, ...matches } = findTokenDto;
+
+    const tokens = await this.prisma.token.findMany({
+      where: matches,
+      skip,
+      orderBy: {
+        [sortField || AllowedTokenSortingFields.value]:
+          sortValue || AllowedTokenSortingValues.asc,
+      },
+      take: limit,
+    });
+    return tokens;
   }
 }
