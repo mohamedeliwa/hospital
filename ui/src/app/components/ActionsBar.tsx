@@ -1,7 +1,8 @@
-import React from 'react';
+'use client';
+
 import { Button } from 'antd';
-import { UserAddOutlined, DiffOutlined } from '@ant-design/icons';
-import styles from '../page.module.css';
+import { UserAddOutlined, FileAddOutlined } from '@ant-design/icons';
+import styles from './ActionsBar.module.css';
 
 const ActionsBar = () => {
   return (
@@ -9,7 +10,7 @@ const ActionsBar = () => {
       <Button type="primary" icon={<UserAddOutlined />} size={'large'}>
         أضف مريض
       </Button>
-      <Button type="primary" icon={<DiffOutlined />} size={'large'}>
+      <Button type="primary" icon={<FileAddOutlined />} size={'large'}>
         أضف قرار
       </Button>
     </div>

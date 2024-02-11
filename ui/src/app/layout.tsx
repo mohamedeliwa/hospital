@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Layout, Menu, theme } from 'antd';
+import Head from 'next/head';
 
 const { Header, Content, Footer } = Layout;
 
@@ -39,6 +40,10 @@ export default function RootLayout({
   } = theme.useToken();
   return (
     <html lang="en">
+      <Head>
+        <title>Hospital management system</title>
+        <meta name="description" content="Hospital management system" />
+      </Head>
       <body className={inter.className}>
         <AntdRegistry>
           <Layout>
