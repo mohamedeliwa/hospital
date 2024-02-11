@@ -34,7 +34,7 @@ model Decision {
 
 model Token {
   id         String    @id @default(uuid())
-  value      Int
+  value      Float
   decision   Decision  @relation(fields: [decisionId], references: [id], onDelete: Cascade)
   decisionId String
   usedAt     DateTime?
