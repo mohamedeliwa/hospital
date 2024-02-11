@@ -33,4 +33,16 @@ export class TokensService {
     });
     return token;
   }
+
+  /**
+   * finds a token by id
+   * @param id - token's id to find
+   * @returns the found token's object
+   */
+  async findOne(id: string): Promise<Token> {
+    const token = await this.prisma.token.findUniqueOrThrow({
+      where: { id },
+    });
+    return token;
+  }
 }
