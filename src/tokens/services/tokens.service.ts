@@ -87,4 +87,17 @@ export class TokensService {
 
     return token;
   }
+
+  /**
+   * deletes a token by id
+   * @param id - id of the token to delete
+   * @returns the deleted token's object
+   */
+  async delete(id: string): Promise<Token> {
+    const token = await this.prisma.token.delete({
+      where: { id },
+    });
+
+    return token;
+  }
 }
