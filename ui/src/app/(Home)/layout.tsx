@@ -1,9 +1,10 @@
 'use client';
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, theme } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 
+// navigation items
 const items = [
   {
     key: 'home',
@@ -24,6 +25,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
   return (
     <Layout>
       <Header style={{ display: 'flex', alignItems: 'center' }}>
@@ -35,7 +40,18 @@ export default function RootLayout({
           style={{ flex: 1, minWidth: 0 }}
         />
       </Header>
-      <Content style={{ padding: '0 48px' }}>{children}</Content>
+      <Content style={{ padding: '0 48px' }}>
+        <div
+          style={{
+            background: colorBgContainer,
+            minHeight: 280,
+            padding: 24,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          {children}
+        </div>
+      </Content>
       <Footer style={{ textAlign: 'center' }}>
         Hospital management system ©{new Date().getFullYear()}.
       </Footer>
