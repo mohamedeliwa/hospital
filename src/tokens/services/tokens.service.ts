@@ -7,6 +7,7 @@ import {
   AllowedTokenSortingValues,
   FindTokenDto,
 } from '../dtos/find.token.dto';
+import { UpdateTokenDto } from '../dtos/update.token.dto';
 
 @Injectable()
 export class TokensService {
@@ -70,5 +71,20 @@ export class TokensService {
       take: limit,
     });
     return tokens;
+  }
+
+  /**
+   * updates token data by id
+   * @param id - token's id to be updated
+   * @param updateTokenDto - token's data to be updated
+   * @returns the updated token object
+   */
+  async update(id: string, updateTokenDto: UpdateTokenDto): Promise<Token> {
+    const token = this.prisma.token.update({
+      where: { id },
+      data: updateTokenDto,
+    });
+
+    return token;
   }
 }
