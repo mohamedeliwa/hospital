@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 
-import ActionsBar from './components/ActionsBar';
-import PatientsTable from './components/PatientsTable';
-import DecisionsTable from './components/DecisionsTable';
+import ActionsBar from '../components/ActionsBar';
+import PatientsTable from '../components/PatientsTable';
+import DecisionsTable from '../components/DecisionsTable';
 
 export default function Home() {
   return (
