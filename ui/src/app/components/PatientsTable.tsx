@@ -1,95 +1,47 @@
 'use client';
+
 import { Table, TableColumnsType, TableProps } from 'antd';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import TableSearchFilter from './TableSearchFilter';
+import { SearchOutlined } from '@ant-design/icons';
 
 interface DataType {
   key: React.Key;
   name: string;
-  age: number;
-  address: string;
+  nationalId: string;
+  phone: string;
 }
 
-const columns: TableColumnsType<DataType> = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    filters: [
-      {
-        text: 'Joe',
-        value: 'Joe',
-      },
-      {
-        text: 'Jim',
-        value: 'Jim',
-      },
-      {
-        text: 'Submenu',
-        value: 'Submenu',
-        children: [
-          {
-            text: 'Green',
-            value: 'Green',
-          },
-          {
-            text: 'Black',
-            value: 'Black',
-          },
-        ],
-      },
-    ],
-    // specify the condition of filtering result
-    // here is that finding the name started with `value`
-    // onFilter: (value: string, record) => record.name.indexOf(value) === 0,
-    sorter: (a, b) => a.name.length - b.name.length,
-    sortDirections: ['descend'],
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.age - b.age,
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    filters: [
-      {
-        text: 'London',
-        value: 'London',
-      },
-      {
-        text: 'New York',
-        value: 'New York',
-      },
-    ],
-    // onFilter: (value: string, record) => record.address.indexOf(value) === 0,
-  },
-];
+const stringSorter = (a: string, b: string) => {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  return 0;
+};
 
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+    name: 'أحمد محمود',
+    nationalId: '12345678901234',
+    phone: '01010101010',
   },
   {
     key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
+    name: 'محمد أحمد',
+    nationalId: '12345678901234',
+    phone: '01010101010',
   },
   {
     key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
+    name: 'محمود أحمد',
+    nationalId: '12345678901234',
+    phone: '01010101010',
   },
   {
     key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
+    name: 'رضا عبده',
+    nationalId: '12345678901234',
+    phone: '01010101010',
   },
 ];
 
@@ -103,7 +55,54 @@ const onChange: TableProps<DataType>['onChange'] = (
 };
 
 const PatientsTable = () => {
-  return <Table columns={columns} dataSource={data} onChange={onChange} />;
+  const [searchInput, setSearchInput] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log({ searchInput });
+    return () => {
+      setSearchInput(null);
+    };
+  }, [searchInput]);
+
+  const columns: TableColumnsType<DataType> = useMemo(() => {
+    return [
+      {
+        title: 'الإسم',
+        dataIndex: 'name',
+        defaultSortOrder: 'ascend',
+        sorter: (a, b) => stringSorter(a.name, b.name),
+      },
+      {
+        title: 'الرقم القومي',
+        dataIndex: 'nationalId',
+        filterDropdown: ({ close }) => (
+          <TableSearchFilter onSearch={setSearchInput} close={close} />
+        ),
+        filterIcon: (filtered: boolean) => (
+          <SearchOutlined style={{ color: filtered ? '#1677ff' : undefined }} />
+        ),
+
+        onFilterDropdownOpenChange: (visible) => {
+          if (visible) return;
+        },
+        sorter: (a, b) => stringSorter(a.nationalId, b.nationalId),
+      },
+      {
+        title: 'تليفون',
+        dataIndex: 'phone',
+        sorter: (a, b) => stringSorter(a.phone, b.phone),
+      },
+    ];
+  }, []);
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      onChange={onChange}
+      style={{ width: '100%' }}
+    />
+  );
 };
 
 export default PatientsTable;
