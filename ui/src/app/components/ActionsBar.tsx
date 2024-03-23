@@ -1,15 +1,14 @@
 'use client';
 
 import { Button } from 'antd';
-import { UserAddOutlined, FileAddOutlined } from '@ant-design/icons';
+import { FileAddOutlined } from '@ant-design/icons';
 import styles from './ActionsBar.module.css';
+import CreatePatientModal from './CreatePatientModal';
 
 const ActionsBar = () => {
   return (
     <div className={styles.description}>
-      <Button type="primary" icon={<UserAddOutlined />} size={'large'}>
-        أضف مريض
-      </Button>
+      <CreatePatientModal />
       <Button type="primary" icon={<FileAddOutlined />} size={'large'}>
         أضف قرار
       </Button>
