@@ -4,6 +4,7 @@ import { Table, TableColumnsType, TableProps } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
 import TableSearchFilter from './TableSearchFilter';
 import { SearchOutlined } from '@ant-design/icons';
+import DeleteModal from './DeleteModal';
 
 interface DataType {
   key: React.Key;
@@ -91,6 +92,10 @@ const PatientsTable = () => {
         title: 'تليفون',
         dataIndex: 'phone',
         sorter: (a, b) => stringSorter(a.phone, b.phone),
+      },
+      {
+        title: 'الإجراءات',
+        render: () => <DeleteModal />,
       },
     ];
   }, []);
