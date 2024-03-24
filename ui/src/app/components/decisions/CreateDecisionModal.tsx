@@ -1,11 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import dayjs from 'dayjs';
 import { Button, FormInstance, Modal } from 'antd';
 import { FileAddOutlined } from '@ant-design/icons';
-import CreatePatientForm, {
-  CreatePatientFormValues,
-} from '../CreatePatientForm';
+import EditDecisionForm, { EditDecisionFormValues } from './EditDecisionForm';
 
 interface CreateDecisionModalProps {}
 
@@ -21,8 +20,12 @@ const CreateDecisionModal: React.FC<CreateDecisionModalProps> = () => {
     setIsModalOpen(false);
   };
 
-  const onCreate = (values: CreatePatientFormValues) => {
-    console.log('Received values of form: ', values);
+  const onCreate = (values: EditDecisionFormValues) => {
+    console.log('Received values of form: ', {
+      ...values,
+      issuedAt: values?.issuedAt?.toISOString(),
+      expirationDate: values?.expirationDate?.toISOString(),
+    });
     setIsModalOpen(false);
   };
 
@@ -54,11 +57,11 @@ const CreateDecisionModal: React.FC<CreateDecisionModalProps> = () => {
           }
         }}
       >
-        <CreatePatientForm
+        <EditDecisionForm
           initialValues={{
-            name: '',
-            phone: '01023456789',
-            nationalId: '01234567891234',
+            serialNumber: '13256',
+            issuedAt: dayjs(),
+            expirationDate: dayjs(),
           }}
           onFormInstanceReady={(instance) => {
             setFormInstance(instance);
