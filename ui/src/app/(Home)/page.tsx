@@ -1,7 +1,7 @@
 import styles from './page.module.css';
 import ActionsBar from '../components/ActionsBar';
-import PatientsTable from '../components/PatientsTable';
-// import DecisionsTable from '../components/DecisionsTable';
+// import PatientsTable from '../components/PatientsTable';
+import DecisionsTable from '../components/decisions/DecisionsTable';
 
 export default function Home() {
   return (
@@ -9,8 +9,8 @@ export default function Home() {
       <ActionsBar />
 
       <div className={styles.center}>
-        <PatientsTable />
-        {/* <DecisionsTable /> */}
+        {/* <PatientsTable /> */}
+        <DecisionsTable />
       </div>
 
       <div className={styles.grid}></div>
