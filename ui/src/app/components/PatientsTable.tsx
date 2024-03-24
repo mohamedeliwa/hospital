@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import TableSearchFilter from './TableSearchFilter';
 import { SearchOutlined } from '@ant-design/icons';
 import DeleteModal from './DeleteModal';
+import UpdatePatientModal from './UpdatePatientModal';
 
 interface DataType {
   key: React.Key;
@@ -95,7 +96,17 @@ const PatientsTable = () => {
       },
       {
         title: 'الإجراءات',
-        render: () => <DeleteModal />,
+        render: () => (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+            }}
+          >
+            <UpdatePatientModal /> <DeleteModal />
+          </div>
+        ),
       },
     ];
   }, []);

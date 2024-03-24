@@ -1,3 +1,7 @@
+/**
+ * used to create and update patients
+ */
+
 'use client';
 
 import { useEffect } from 'react';
